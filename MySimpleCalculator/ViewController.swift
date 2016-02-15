@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var numberPanel: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -18,6 +20,16 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    @IBAction func number1Pressed(sender: AnyObject) {
+        numberPressed("1")
+    }
+    
+    func numberPressed(number: String) {
+        numberPanel.text = numberPanel.text! + number
     }
 
 
