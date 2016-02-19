@@ -120,6 +120,16 @@
                                     <action selector="plusPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R6y-Bi-J9Z"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4R4-Yi-0Ar">
+                                <rect key="frame" x="283" y="375" width="72" height="62"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <state key="normal" title="=" backgroundImage="Blue_Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="equalPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Okj-A4-Pcb"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLj-b2-49q">
                                 <rect key="frame" x="194" y="375" width="72" height="62"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
@@ -137,7 +147,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4j-l9-Kk1">
-                                <rect key="frame" x="283" y="370" width="72" height="67"/>
+                                <rect key="frame" x="283" y="450" width="72" height="67"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="C" backgroundImage="Blue_Button">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -146,14 +156,14 @@
                                     <action selector="numberCPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bbO-tj-hzx"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4R4-Yi-0Ar">
-                                <rect key="frame" x="283" y="288" width="72" height="67"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPt-t2-ZOO">
+                                <rect key="frame" x="283" y="291" width="72" height="61"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <state key="normal" title="=" backgroundImage="Blue_Button">
+                                <state key="normal" title="-" backgroundImage="Blue_Button">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="equalPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Okj-A4-Pcb"/>
+                                    <action selector="minusPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3oQ-Qo-jWz"/>
                                 </connections>
                             </button>
                         </subviews>

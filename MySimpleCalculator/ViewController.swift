@@ -14,12 +14,14 @@ class ViewController: UIViewController {
     var prevNumOnPanel : Int = 0
     var currNumOnPanel : Int = 0
     var totalInMemory : Int = 0
-    // var operatorPressed : Bool = false
+    var inMinusMode : Bool = false
     var currentOperatorPressed : Int = 0
     var lastOperatorPressed : Int = 0
     
+    let NOT_AN_OPERATOR = 0
     let EQUALS = 1
     let PLUS = 2
+    let MINUS = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +81,10 @@ class ViewController: UIViewController {
         currNumOnPanel = 0
     }
     
+    @IBAction func minusPressed(sender: AnyObject) {
+        currentOperatorPressed = MINUS
+        compute()
+    }
     
     @IBAction func plusPressed(sender: AnyObject) {
         currentOperatorPressed = PLUS
@@ -92,13 +98,23 @@ class ViewController: UIViewController {
     
     func compute() {
         if currentOperatorPressed == PLUS {
-            prevNumOnPanel = Int(numberPanel.text!)!
+            // prevNumOnPanel = Int(numberPanel.text!)!
+
+            // if user clicks PLUS after entering the 
+            // number to be MINUSed, we must process
+            // that MINUS first
+            if inMinusMode {
+                totalInMemory = totalInMemory - currNumOnPanel
+                numberPanel.text = "\(totalInMemory)"
+                inMinusMode = false
+            }
+            
             
             // if previous press was not an operator
             // then we process the addition in memory
-            if lastOperatorPressed==0 {
+            if lastOperatorPressed == NOT_AN_OPERATOR {
                 lastOperatorPressed = PLUS
-                totalInMemory = totalInMemory + prevNumOnPanel
+                totalInMemory = totalInMemory + currNumOnPanel
                 numberPanel.text = "\(totalInMemory)"
             }
                 // but if the previous key press was equals
@@ -106,17 +122,48 @@ class ViewController: UIViewController {
                 // already on the panel. Hence we keep what is
                 // shown on the panel as the total in memory
             else if lastOperatorPressed == EQUALS {
-                totalInMemory = prevNumOnPanel
+                totalInMemory = currNumOnPanel
             }
-        } else if currentOperatorPressed == EQUALS {
-            if lastOperatorPressed == 0 {
+        }
+        else if currentOperatorPressed == MINUS {
+            lastOperatorPressed = MINUS
+            currNumOnPanel = Int(numberPanel.text!)!
+            
+            // Are we currently in minus mode? We use
+            // minus mode to track if we need to do any subtraction
+            if inMinusMode {
+                totalInMemory = totalInMemory - currNumOnPanel
+                numberPanel.text = "\(totalInMemory)"
+                
+            } else {
+                // first time the minus sign is pressed, we 
+                // reset the total in memory to what is shown on
+                // panel
+                totalInMemory = currNumOnPanel
+                inMinusMode = true
+            }
+            
+        }
+        else if currentOperatorPressed == EQUALS {
+            
+            if lastOperatorPressed == NOT_AN_OPERATOR {
                 lastOperatorPressed = EQUALS
                 prevNumOnPanel = Int(numberPanel.text!)!
-                totalInMemory = totalInMemory + prevNumOnPanel
-                numberPanel.text = "\(totalInMemory)"
-                // reset the total in memory
-                prevNumOnPanel = 0
-                totalInMemory = 0
+                
+                if inMinusMode {
+                    totalInMemory = totalInMemory - prevNumOnPanel
+                    numberPanel.text = "\(totalInMemory)"
+                    inMinusMode = false
+                }
+                // assuming that its in plus mode if it is not
+                // in minus mode
+                else {
+                    totalInMemory = totalInMemory + prevNumOnPanel
+                    numberPanel.text = "\(totalInMemory)"
+                    // reset the total in memory
+                    prevNumOnPanel = 0
+                    totalInMemory = 0
+                }
             }
         }
     }
@@ -124,9 +171,9 @@ class ViewController: UIViewController {
     func numberPressed(number: String) {
         
         // clear the panel if an operator was pressed before this
-        if lastOperatorPressed != 0 {
+        if lastOperatorPressed != NOT_AN_OPERATOR {
             numberPanel.text = ""
-            lastOperatorPressed = 0
+            lastOperatorPressed = NOT_AN_OPERATOR
         }
         
         // if the number panel is showing 0, then just show the number pressed
@@ -134,9 +181,8 @@ class ViewController: UIViewController {
             numberPanel.text = number
         } else {
             numberPanel.text = numberPanel.text! + number
-            currNumOnPanel =   Int(numberPanel.text!)!
         }
-        
+        currNumOnPanel = Int(numberPanel.text!)!
     }
     
     func clearNumberPanel() {
